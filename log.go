@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"os"
 	"regexp"
+	"time"
 )
 
 // Config log config.
@@ -162,6 +164,8 @@ func Fatal(format string, args ...interface{}) {
 	if int32(_fatalLevel) >= c.V {
 		h.Log(context.Background(), _fatalLevel, KVString(_log, fmt.Sprintf(format, args...)))
 	}
+	defer os.Exit(0)
+	time.Sleep(100 * time.Millisecond)
 }
 
 // Debugc logs a message at the debug log level.
@@ -197,6 +201,8 @@ func Fatalc(ctx context.Context, format string, args ...interface{}) {
 	if int32(_fatalLevel) >= c.V {
 		h.Log(ctx, _fatalLevel, KVString(_log, fmt.Sprintf(format, args...)))
 	}
+	defer os.Exit(0)
+	time.Sleep(100 * time.Millisecond)
 }
 
 // Debugv logs a message at the debug log level.
@@ -232,6 +238,8 @@ func Fatalv(ctx context.Context, args ...D) {
 	if int32(_fatalLevel) >= c.V {
 		h.Log(ctx, _fatalLevel, args...)
 	}
+	defer os.Exit(0)
+	time.Sleep(100 * time.Millisecond)
 }
 
 func logw(args []interface{}) []D {
@@ -282,6 +290,8 @@ func Fatalw(ctx context.Context, args ...interface{}) {
 	if int32(_fatalLevel) >= c.V {
 		h.Log(ctx, _fatalLevel, logw(args)...)
 	}
+	defer os.Exit(0)
+	time.Sleep(100 * time.Millisecond)
 }
 
 // SetFormat only effective on stdout and file handler
