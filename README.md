@@ -6,7 +6,7 @@ log
 #### 引用包
 ```go
 import (
-	"gitee.com/ha666/log"
+	"github.com/ha666/log"
 )
 ```
 
